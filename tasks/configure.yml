@@ -14,16 +14,4 @@
     dest: "/etc/systemd/system/go-audit.service"
     mode: 0755
     backup: true
-  register: service
-  notify: goaudit_restart
-
-- name: Ensure systemd is reloaded if go-audit has changed.
-  systemd:
-    daemon_reload: yes
-  when: service.changed
-
-- name: Rnable go-audit systemd service.
-  service:
-    name: go-audit
-    enabled: true
-  when: service.changed
+  notify: ['goaudit_restart', 'systemd_reload', 'goaudit_enable']
