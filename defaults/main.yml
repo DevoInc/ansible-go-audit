@@ -1,0 +1,44 @@
+---
+
+# Config vars
+goaudit_event_type_min: 1300
+goaudit_event_type_max: 1399
+goaudit_message_tracking: "true"
+goaudit_log_out_order: "false"
+goaudit_max_out_order: 500
+## Only one output can be enabled
+goaudit_output_stdout_enabled: "false"
+goaudit_output_stdout_attemps: 2
+goaudit_output_syslog_enabled: "false"
+goaudit_output_syslog_attemps: 5
+goaudit_output_syslog_network: "unixgram"
+goaudit_output_syslog_address: "/dev/log"
+goaudit_output_syslog_priority: 129
+goaudit_output_syslog_tag: "go-audit" 
+goaudit_output_file_enabled: "true"
+goaudit_output_file_attemps: 2
+goaudit_output_file_path: "/var/log/go-audit/go-audit.log"
+goaudit_output_file_mode: 0600
+goaudit_output_file_user: "root"
+goaudit_output_file_group: "root"
+goaudit_output_gelf_enabled: "false"
+goaudit_output_gelf_ttemps: 3
+goaudit_output_gelf_network: "udp"
+goaudit_output_gelf_address: "localhost:12201"
+goaudit_output_gelf_compression: 1
+goaudit_output_gelf_type: 0
+goaudit_log_flags: 0
+goaudit_rules:
+  - "-a exit,always -F arch=b64 -S execve"
+  - "-a exit,always -F arch=b32 -S execve"
+goaudit_rules_lock: 1
+goaudit_filters:
+  - syscall: 49
+    message_type: 1306
+    regex: "saddr=(10..|0A..)"
+  - syscall: 50
+    message_type: 1307
+    regex: "saddr=(11..|0B..)"
+
+# Service vars
+goaudit_service_restart: "true"
