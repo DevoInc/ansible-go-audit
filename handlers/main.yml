@@ -1,0 +1,6 @@
+---
+
+- name: goaudit_restart
+  service:
+    name: go-audit
+    state: restarted
