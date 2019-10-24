@@ -30,6 +30,7 @@ scenario:
   test_sequence:
     - destroy
     - create
+    - dependency
     - converge
     - lint
     - verify
