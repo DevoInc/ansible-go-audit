@@ -1,0 +1,6 @@
+---
+
+- name: Install go-audit package
+  package:
+    name: go-audit
+    state: present
