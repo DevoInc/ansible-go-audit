@@ -1,0 +1,16 @@
+# /etc/systemd/system/go-audit.service
+[Unit]
+Description = go-audit
+After=network.target auditd.service
+Conflicts = auditd.service
+
+[Service]
+Type = simple
+ExecStart = /usr/local/bin/go-audit -config /etc/go-audit.yaml
+{% if goaudit_service_restart == 'true' %}
+Restart=always
+RestartSec=1
+{% endif %}
+
+[Install]
+WantedBy = multi-user.target
