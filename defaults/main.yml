@@ -14,7 +14,7 @@ goaudit_output_syslog_attemps: 5
 goaudit_output_syslog_network: "unixgram"
 goaudit_output_syslog_address: "/dev/log"
 goaudit_output_syslog_priority: 129
-goaudit_output_syslog_tag: "go-audit" 
+goaudit_output_syslog_tag: "go-audit"
 goaudit_output_file_enabled: "true"
 goaudit_output_file_attemps: 2
 goaudit_output_file_path: "/var/log/go-audit/go-audit.log"
