@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  become_user: root
+  roles:
+    - role: devoinc.repositories
+    - role: ansible-go-audit
+
+  pre_tasks:
+    - name: install required packages in RedHat and Debian to molecule tests.
+      package:
+        name: ['rsync', 'net-tools']
