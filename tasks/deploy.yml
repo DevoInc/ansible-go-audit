@@ -5,8 +5,22 @@
     name: go-audit
     state: present
 
-- name: Stop and disable auditd service.
+- name: Stop and disable auditd service in Debian OS.
   service:
     name: auditd
     state: stopped
     enabled: false
+  when: ansible_os_family == 'Debian'
+
+- name: Stop audit service in ReHat OS.
+  service:
+    name: auditd
+    state: stopped    
+    use: service
+  when: ansible_os_family == 'RedHat'
+
+- name: Disable auditd service in RedHat OS.
+  service:
+    name: auditd
+    enabled: false
+  when: ansible_os_family == 'RedHat'
