@@ -114,15 +114,62 @@ log:
   flags: {{ goaudit_log_flags }}
 
 rules:
+{% if goaudit_default_rules is undefined and goaudit_specific_rules is undefined %}
+
+{% else %}
+{% if goaudit_default_rules is undefined and goaudit_specific_rules %}
+{% set goaudit_rules = goaudit_specific_rules %}
 {% for rule in goaudit_rules %}
   - {{ rule }}
 {% endfor %}
+{% else %}
+{% if goaudit_specific_rules is undefined and goaudit_default_rules %}
+{% set goaudit_rules = goaudit_default_rules %}
+{% for rule in goaudit_rules %}
+  - {{ rule }}
+{% endfor %}
+{% else %}
+{% if goaudit_specific_rules and goaudit_default_rules %}
+{% set goaudit_rules = goaudit_default_rules + goaudit_specific_rules %}
+{% for rule in goaudit_rules %}
+  - {{ rule }}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
   - -e {{ goaudit_rules_lock }}
 
 # If kaudit filtering isn't powerful enough you can use the following filter mechanism
 filters:
+{% if goaudit_default_filters is undefined and goaudit_specific_filters is undefined %}
+
+{% else %}
+{% if goaudit_default_filters is undefined and goaudit_specific_filters %}
+{% set goaudit_filters = goaudit_specific_filters %}
 {% for filter in goaudit_filters %}
   - syscall: {{ filter.syscall }} 
     message_type: {{ filter.message_type }}
     regex: {{ filter.regex }}
 {% endfor %}
+{% else %}
+{% if goaudit_specific_filters is undefined and goaudit_default_filters %}
+{% set goaudit_filters = goaudit_default_filters %}
+{% for filter in goaudit_filters %}
+  - syscall: {{ filter.syscall }} 
+    message_type: {{ filter.message_type }}
+    regex: {{ filter.regex }}
+{% endfor %}
+{% else %}
+{% if goaudit_specific_filters and goaudit_default_filters %}
+{% set goaudit_filters = goaudit_default_filters + goaudit_specific_filters %}
+{% for filter in goaudit_filters %}
+  - syscall: {{ filter.syscall }} 
+    message_type: {{ filter.message_type }}
+    regex: {{ filter.regex }}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+

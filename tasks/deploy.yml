@@ -1,6 +1,12 @@
 ---
 
-- name: Install go-audit package
+- name: Install go-audit package.
   package:
     name: go-audit
     state: present
+
+- name: Stop and disable auditd service.
+  service:
+    name: auditd
+    state: stopped
+    enabled: false

@@ -28,17 +28,19 @@ goaudit_output_gelf_address: "localhost:12201"
 goaudit_output_gelf_compression: 1
 goaudit_output_gelf_type: 0
 goaudit_log_flags: 0
-goaudit_rules:
+goaudit_default_rules:
   - "-a exit,always -F arch=b64 -S execve"
   - "-a exit,always -F arch=b32 -S execve"
 goaudit_rules_lock: 1
-goaudit_filters:
-  - syscall: 49
-    message_type: 1306
-    regex: "saddr=(10..|0A..)"
-  - syscall: 50
-    message_type: 1307
-    regex: "saddr=(11..|0B..)"
+
+#To add default rules, examples:
+#goaudit_default_filters:
+#  - syscall: 49
+#    message_type: 1306
+#    regex: "saddr=(10..|0A..)"
+#  - syscall: 50
+#    message_type: 1307
+#    regex: "saddr=(11..|0B..)"
 
 # Service vars
 goaudit_service_restart: "true"
