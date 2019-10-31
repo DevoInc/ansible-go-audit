@@ -13,6 +13,11 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - xenial
+  galaxy_tags:
+    - audit
+    - security
+    - OS
+
   dependencies:
     - role: devoinc.repositories
       tags: ['role::repositories']
