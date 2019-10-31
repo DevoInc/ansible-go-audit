@@ -1,4 +1,8 @@
 ---
+- name: Ensure go-audit.log permisions.
+  file:
+    path: /var/log/go-audit/go-audit.log
+    mode: 0644
 
 - name: Configure go-audit, copy config file template.
   template:
