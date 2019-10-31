@@ -1,0 +1,9 @@
+---
+
+- name: Deploy go-audit
+  include: deploy.yml
+  tags: ['role::go-audit', 'role::go-audit::deploy']
+
+- name: Configure go-audit
+  include: configure.yml
+  tags: ['role::go-audit', 'role::go-audit::configure']

@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+  ssh_connection_options:
+    - '-o ControlPath=~/.ansible/cp/%r@%h-%p'
+lint:
+  name: yamllint
+platforms:
+  - name: centos7
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    box: centos/7
+    memory: 1024
+    cpus: 1
+    provider_raw_config_args:
+      - "customize ['modifyvm', :id, '--cpuexecutioncap', '50']"
+    provision: true
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: centos7
+  test_sequence:
+    - destroy
+    - create
+    - dependency
+    - converge
+    - lint
+    - verify
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

@@ -1,0 +1,15 @@
+---
+
+- name: goaudit_restart
+  service:
+    name: go-audit
+    state: restarted
+
+- name: systemd_reload
+  systemd:
+    daemon_reload: true
+
+- name: goaudit_enable
+  service:
+    name: go-audit
+    enabled: true

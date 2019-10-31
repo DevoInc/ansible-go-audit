@@ -1,0 +1,21 @@
+---
+- name: Ensure go-audit.log permisions.
+  file:
+    path: /var/log/go-audit/go-audit.log
+    mode: 0644
+
+- name: Configure go-audit, copy config file template.
+  template:
+    src: go-audit.yaml.j2
+    dest: "/etc/go-audit.yaml"
+    mode: 0644
+    backup: true
+  notify: goaudit_restart
+
+- name: Configure service, copy service file template.
+  template:
+    src: go-audit.service.j2
+    dest: "/etc/systemd/system/go-audit.service"
+    mode: 0755
+    backup: true
+  notify: ['goaudit_restart', 'systemd_reload', 'goaudit_enable']

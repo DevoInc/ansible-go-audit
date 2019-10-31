@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: devoinc.go-audit
+  author: David Garcia
+  description: Deploy and configure go-audit.
+  company: Devo inc.
+  license: MIT
+  min_ansible_version: 2.7
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - xenial
+  galaxy_tags:
+    - audit
+    - security
+    - OS
+
+  dependencies:
+    - role: devoinc.repositories
+      tags: ['role::repositories']
