@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: go-audit
+  role_name: devoinc.go-audit
   author: David Garcia
   description: Deploy and configure go-audit.
   company: Devo inc.
