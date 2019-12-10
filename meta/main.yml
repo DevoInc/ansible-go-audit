@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: devoinc.go-audit
+  role_name: go-audit
   author: David Garcia
   description: Deploy and configure go-audit.
   company: Devo inc.
@@ -13,6 +13,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - xenial
+        - Bionic
   galaxy_tags:
     - audit
     - security
